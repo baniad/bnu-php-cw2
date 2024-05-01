@@ -1,44 +1,19 @@
-<?php 
+<?php
 
+include("_includes/config.inc");
+include("_includes/dbconnect.inc");
+include("_includes/functions.inc");
+require_once 'vendor/autoload.php';
 
-   include("_includes/config.inc");
-   include("_includes/dbconnect.inc");
-   include("_includes/functions.inc");
+// use the factory to create a Faker\Generator instance
+$faker = Faker\Factory::create();
 
-   echo template("templates/partials/header.php");
+if (isset($_SESSION['id'])) {
 
-   if (isset($_GET['return'])) {
-      $msg = "";
-      if ($_GET['return'] == "fail") {$msg = "Login Failed. Please try again.";}
-      $data['message'] = "<p>$msg</p>";
-    }
-
-
-$servername = "localhost";
-$username = "";
-$password = "";
-$dbname = "php_cw2";
-
-$conn = new mysqli($servername, $username, $password, $database);
-
-// Connected?
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+    $sql = "INSERT INTO student (studentid, dob, firstname, lastname, house, town, county, country, postcode, module) 
+            VALUES ('" . $_POST['studentid'] . "','" . $_POST['dob'] . "','" . $faker->firstName . "','" . $faker->lastName . "','" . $_POST['house'] . "','" . $_POST['town'] . "','" . $_POST['county'] . "','" . $_POST['country'] . "','" . $_POST['postcode'] . "','" . $_POST['module'] . "');";
+      
+    $result = mysqli_query($conn,$sql);
 }
-
-$sql = "INSERT INTO student (studentid, password, dob, firstname, lastname, house) VALUES 
-        (35467291, 'password123', '1991-03-27', 'Nick', 'Bowley', '25 Oak Lane'),
-        (73829382, 'password123', '1990-05-01', 'Pip', 'Collins', '34 Southfield Avenue'),
-        (10928374, 'password123', '1987-08-25', 'Phil', 'Walsh', '18 Sussex Road'),
-        (83746283, 'password123', '1983-08-25', 'Jane', 'Ackers', '4 Evans Close'),
-        (47238463, 'password123', '1996-12-12', 'Edwin', 'Roberts', '1 Wessex Circle')";
-
-if ($conn->multi_query($sql) === TRUE){
-    echo "Records inserted successfully";
-} else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-}
-
-$conn->close();
 
 ?>
