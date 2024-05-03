@@ -1,55 +1,95 @@
+
 <?php
 
-   include("_includes/config.inc");
-   include("_includes/dbconnect.inc");
-   include("_includes/functions.inc");
+include("_includes/config.inc");
+include("_includes/dbconnect.inc");
+include("_includes/functions.inc");
 
-   
-   echo template("templates/partials/header.php");
-   
-   //faker library
-   require_once 'vendor/autoload.php';
 
-   //declaring new instance of Faker Library
-   $faker = Faker\Factory::create();
+echo template("templates/partials/header.php");
+echo template("templates/partials/nav.php");
 
-   //db connection
-   $db = new mysqli("localhost", "root", "", "php_cw2");
+echo"</br><h3> University Students: </h3></br>";
+//db connection
+  // $db = new mysqli("localhost", "root", "", "oss-cw2");
 
-   //inserting manually
-   
-   //$db->query("INSERT INTO student(studentid, password, dob, firstname, lastname, house, town, county, country, postcode) 
-   //VALUES ('2000000','$2y$10$.LJBO164nZWEVVE/v5mgNuzR01zx1zoyXuGJUa/zp2U.MQxkps3LS','1974-11-10','Jon','Smith','23 Victoria Road',
-   //'High Wycombe', 'Bucks', 'UK', 'HP11 1RT');");
 
-   // Insert 5 student records into the database using faker library
-  
-   for ($i = 0; $i < 5; $i++) {
-      $studentid = $faker->unique()->numberBetween(20000001, 29999999);
-      $hashed_password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-     // $password = $faker->password();
-      $dob = mysqli_real_escape_string($db, $faker->date());
-      $firstname = mysqli_real_escape_string($db, $faker->firstName());
-      $lastname = mysqli_real_escape_string($db, $faker->lastName());
-      $house = mysqli_real_escape_string($db, $faker->buildingNumber());
-      $town = mysqli_real_escape_string($db, $faker->city());
-      $county = mysqli_real_escape_string($db, $faker->state());
-      $country = mysqli_real_escape_string($db, $faker->country());
-      $postcode = mysqli_real_escape_string($db, $faker->postcode());
-      
-      
+// Retrieve all the records from the student table
+$sql = "SELECT * FROM student";
+$result = mysqli_query($conn, $sql);
 
-  
-      $sql = "INSERT INTO student (studentid, password, dob, firstname, lastname, house, town, county, country, postcode)
-              VALUES ('$studentid', '$hashed_password', '$dob', '$firstname', '$lastname', '$house', '$town', '$county', '$country',
-               '$postcode')";
+// Display the records in an HTML table
 
-      $db->query($sql);
+echo"<form action='deletestudents.php' method='POST' onsubmit='return checkForm(this)'>";
+if ($result->num_rows > 0) {
+  echo"<div class='table-responsive'>";
+  echo "<table class='table table-striped'>";
+  echo "<tr><th>Student ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th> 
+            <th>House</th>
+            <th>Town</th>
+            <th>County</th>
+            <th>Country</th>
+            <th>Postcode</th>
+            <th> Profile Photo</th>
+            <th> X </th></tr>";
+  while($row = $result->fetch_assoc()) {
+    echo "<tr>";
+    echo "<td>". $row["studentid"] . "</td>";
+    echo "<td>". $row["firstname"] . "</td>";
+    echo "<td>". $row["lastname"] . "</td>";
+    echo "<td>" . $row["dob"] . "</td>";
+    echo "<td>" . $row["house"] . "</td>";
+    echo "<td>". $row["town"] . "</td>";
+    echo "<td>". $row["county"] . "</td>";
+    echo "<td>". $row["country"] . "</td>";
+    echo "<td>". $row["postcode"] . "</td>";
+    if(!empty($row["profileimg"])){
+     echo "<td class='text-center'> <img src='data:image/jpeg;base64," . base64_encode($row['profileimg']) . "' height='80' width='120' /> </td>";
+    }else {
+     echo "<td> No Image Available </td>";
   }
+    echo " <td>". "<input type = 'checkbox' name='students[]' value='$row[studentid]' </td>";
+    //echo "<td><img src='getjpeg.php?id=". $row["studentid"] . "' height='50' width='50'</td>" ;
+    echo "</tr>";
+  }
+  echo "</table>";
+  echo "</div>";
+  echo "<br>";
+  echo "&nbsp;&nbsp;&nbsp;";
+  echo "<input type='button' value=' Back to Dashboard' onclick='window.location.href=\"index.php\"'>";
+  echo "&nbsp;&nbsp;&nbsp;";
+  echo "<input type='submit' name='deletebtn' value='Delete'/>";
+  echo "&nbsp;&nbsp;&nbsp;";
+  echo "<input type='button' value='Add New Student' onclick='window.location.href=\"addstudent2.php\"'>";
+  echo"</form>";
+} else {
+  echo "No records found.";
+}
 
-  // if my query is correct this message should be displayed:
-  echo "Inserted 5 student records into the database.";
+echo template("templates/partials/footer.php");
 
-  echo template("templates/partials/footer.php");
+//$db->close();
 
 ?>
+
+<script>
+function checkForm(form) {
+    // Check if at least one checkbox is selected
+    var checkboxes = form.elements['students[]'];
+    var checkboxChecked = false;
+    for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+            checkboxChecked = true;
+            break;
+        }
+    }
+    if (!checkboxChecked) {
+        alert('Please select at least one student to delete.');
+        return false;
+    }
+    return true;
+}
+</script>
