@@ -14,7 +14,7 @@
    $faker = Faker\Factory::create();
 
    //db connection
-   $db = new mysqli("localhost", "root", "", "oss-cw2");
+   $db = new mysqli("localhost", "root", "", "php_cw2");
 
    //inserting manually
    
