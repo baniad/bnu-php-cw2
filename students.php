@@ -10,8 +10,10 @@ $faker = Faker\Factory::create();
 
 if (isset($_SESSION['id'])) {
 
+    $dob = $faker->dateTimeThisCentury->format('Y-m-d');
+
     $sql = "INSERT INTO student (studentid, dob, firstname, lastname, house, town, county, country, postcode, module) 
-            VALUES ('" . $_POST['studentid'] . "','" . $faker->dob . "','" . $faker->firstName . "','" . $faker->lastName . "','" . $_POST['house'] . "','" . $_POST['town'] . "','" . $_POST['county'] . "','" . $_POST['country'] . "','" . $_POST['postcode'] . "','" . $_POST['module'] . "');";
+            VALUES ('" . $_POST['studentid'] . "','" . $dob . "','" . $faker->firstName . "','" . $faker->lastName . "','" . $_POST['house'] . "','" . $_POST['town'] . "','" . $_POST['county'] . "','" . $_POST['country'] . "','" . $_POST['postcode'] . "','" . $_POST['module'] . "');";
       
     $result = mysqli_query($conn,$sql);
 }
