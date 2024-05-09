@@ -36,5 +36,5 @@ for ($i = 0; $i < 5; $i++) {
     }
 }
 
-$db->close();
+$db->query($sql);
 
