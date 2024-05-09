@@ -6,7 +6,7 @@ require_once 'vendor/autoload.php';
 $faker = Faker\Factory::create();
 
 // Connect to the database
-$db = new mysqli("localhost", "root", "", "php_cw2");
+$db = new mysqli("localhost", "root", " ", "php_cw2");
 
 // Check the connection
 if ($db->connect_error) {
