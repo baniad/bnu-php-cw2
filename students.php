@@ -4,6 +4,8 @@ include("_includes/config.inc");
    include("_includes/dbconnect.inc");
    include("_includes/functions.inc");
 
+   echo template("templates/partials/header.php");
+
 require_once 'vendor/autoload.php';
 
 // Create a new instance of Faker
@@ -39,6 +41,7 @@ for ($i = 0; $i < 5; $i++) {
         echo "Error: " . $sql . "\n" . $db->error;
     }
 }
+    echo template("templates/partials/footer.php");
 
-$db->query($sql);
+    $db->query($sql);
 
