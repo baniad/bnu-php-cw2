@@ -1,5 +1,9 @@
 <?php
 
+include("_includes/config.inc");
+   include("_includes/dbconnect.inc");
+   include("_includes/functions.inc");
+
 require_once 'vendor/autoload.php';
 
 // Create a new instance of Faker
