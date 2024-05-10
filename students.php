@@ -18,7 +18,7 @@ foreach($_POST['delete'] as $student_id => $value)
     $stmt->close();
 }
 
-
+}
 
 // check if the user is logged in
 if (isset($_SESSION['id']))
