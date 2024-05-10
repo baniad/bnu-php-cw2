@@ -17,7 +17,7 @@ foreach($_POST['delete'] as $student_id => $value)
     $stmt->execute();
     $stmt->close();
 }
-?>
+
 
 
 // check if the user is logged in
@@ -68,4 +68,5 @@ if (isset($_SESSION['id']))
 
    echo template("templates/partials/footer.php");
 
+}
 ?>
