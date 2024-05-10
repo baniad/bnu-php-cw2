@@ -18,9 +18,11 @@ $db = new mysqli("localhost", "root", "", "oss-cw2");
 if ($db->connect_error) {
     die("Connection failed: " . $db->connect_error);
 }
+$sql = "INSERT INTO student (studentid, password, dob, firstname, lastname, house, town, county, country, postcode)
+        VALUES ('20000001', 'password', '2000-01-01', 'John', 'Doe', '1', 'Town', 'County', 'Country', 'AB1 2CD')";
 
 // Insert 5 student records into the database
-for ($i = 0; $i < 5; $i++) {
+/*for ($i = 0; $i < 5; $i++) {
     $studentid = $faker->unique()->numberBetween(20000001, 29999999);
     $password = password_hash($faker->password, PASSWORD_DEFAULT);
     $dob = $faker->date('Y-m-d');
@@ -40,6 +42,8 @@ for ($i = 0; $i < 5; $i++) {
     } else {
         echo "Error: " . $sql . "\n" . $db->error;
     }
-}
+
 
 echo template("templates/partials/footer.php");
+*/
+?>
