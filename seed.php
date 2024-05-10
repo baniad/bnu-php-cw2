@@ -22,11 +22,14 @@ for ($i=0; $i < 5; $i++){
     $country = mysqli_real_escape_string($conn, $faker->country());
     $postcode = mysqli_real_escape_string($conn, $faker->postcode());
 
+}
+
     $sql = "INSERT INTO student
         (studentid, password, dob, firstname, lastname, house, town, county, country, postcode)
         VALUES ('$studentid', '$password', '$dob', '$firstname', '$lastname', '$house', '$town', '$county', '$country', '$postcode')";
     $result = mysqli_query($conn,$sql);
-}
+
+
 ?>
 
 
