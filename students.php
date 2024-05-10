@@ -15,7 +15,6 @@
 
       $result = mysqli_query($conn,$sql);
 
-      <?php
       $data['content'] .= '<form onsubmit="return confirm(\'Are you sure you want to delete?\')" action="deletestudents.php" method="POST">';
       
       // prepare page content
@@ -53,7 +52,7 @@
       }
       $data['content'] .= "</table>";
       $data['content'] .= "</form>";
-      ?>
+      
       }
       $data['content'] .= "</table>";
 
