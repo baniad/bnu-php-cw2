@@ -29,7 +29,7 @@ for ($i=0; $i < 5; $i++){
         VALUES ('$studentid', '$password', '$dob', '$firstname', '$lastname', '$house', '$town', '$county', '$country', '$postcode')";
     $result = mysqli_query($conn,$sql);
 
-
+in
 ?>
 
 
