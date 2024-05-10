@@ -11,11 +11,12 @@ if(!empty($_POST['delete']))
   foreach($_POST['delete'] as $student_id => $value)
   {
 
-    //delete the student record
-    $stmt = $conn->prepare("DELETE FROM student WHERE studentid = $student_id");
+//delete the student record
+    $stmt = $conn->prepare("DELETE FROM student WHERE studentid = ?");
     $stmt->bind_param("s", $_POST['studentid']);
     $stmt->execute();
     $stmt->close();
+    
 
 
 
