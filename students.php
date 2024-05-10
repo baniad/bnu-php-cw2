@@ -8,20 +8,17 @@ include("_includes/functions.inc");
 
 if(!empty($_POST['delete']))
 {
-  foreach($_POST['delete'] as $student_id => $value)
-  {
-
-//delete the student record
+//loop through the array of students to delete
+foreach($_POST['delete'] as $student_id => $value)
+{
+    //delete the student record
     $stmt = $conn->prepare("DELETE FROM student WHERE studentid = ?");
-    $stmt->bind_param("s", $_POST['studentid']);
+    $stmt->bind_param("s", $student_id);
     $stmt->execute();
     $stmt->close();
-    
-
-
-
-  }
 }
+?>
+
 
 // check if the user is logged in
 if (isset($_SESSION['id']))
