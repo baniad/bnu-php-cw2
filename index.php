@@ -3,6 +3,7 @@
    include("_includes/config.inc");
    include("_includes/dbconnect.inc");
    include("_includes/functions.inc");
+   include("templates/partials/header.php");
 
    echo template("templates/partials/header.php");
 
