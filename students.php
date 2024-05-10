@@ -68,5 +68,5 @@ if (isset($_SESSION['id']))
 
    echo template("templates/partials/footer.php");
 
-}
+
 ?>
