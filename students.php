@@ -39,7 +39,6 @@
       while($row = mysqli_fetch_array($result)) {
          $data['content'] .= "<tr>";
          $data['content'] .= "<td> {$row["studentid"]} </td>";
-         $data['content'] .= "<td> {$row["password"]} </td>";
          $data['content'] .= "<td> {$row["dob"]}</td>";
          $data['content'] .= "<td> {$row["firstname"]}</td>";
          $data['content'] .= "<td> {$row["lastname"]}</td>";
