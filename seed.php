@@ -30,5 +30,5 @@ for ($i=0; $i < 5; $i++){
     $result = mysqli_query($conn,$sql);
 }
 ?>
-?>
+
 
