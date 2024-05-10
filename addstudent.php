@@ -26,14 +26,14 @@ if (isset($_SESSION['id'])) {
                    '{$_POST['house']}', '{$_POST['town']}', '{$_POST['county']}', '{$_POST['country']}', '{$_POST['postcode']}', '{$_FILES['imagedata']['name']}')";
    
 
-      //echo $sql;
+      echo $sql;
 
       $result = mysqli_query($conn,$sql);
       
    
       
 
-      $data['content'] = "<p>A new student record has been added</p>";
+      echo $data['content'] = "<p>A new student record has been added</p>";
 
    }
 
