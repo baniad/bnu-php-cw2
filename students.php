@@ -4,7 +4,6 @@
    include("_includes/dbconnect.inc");
    include("_includes/functions.inc");
 
-
    // check logged in
    if (isset($_SESSION['id'])) {
 
@@ -51,15 +50,9 @@
          $data['content'] .= "</tr>";
       }
       $data['content'] .= "</table>";
+      $data['content'] .= "<input type='submit' name='deletebtn' value='Delete'/>";
       $data['content'] .= "</form>";
       
-      }
-      $data['content'] .= "</table>";
-
-      $data['content'] .= "<input type='submit' name='deletebtn' value='Delete'/>";
-
-      $data['content'] .= "</form>";
-
       // render the template
       echo template("templates/default.php", $data);
      }
