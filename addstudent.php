@@ -33,7 +33,7 @@ if (isset($_SESSION['id'])) {
    
       
 
-      echo $data['content'] = "<p>A new student record has been added</p>";
+    $data['content'] = "<p>A new student record has been added</p>";
 
    }
 
