@@ -21,7 +21,6 @@
       $data['content'] .= "<table border='1'>";
       $data['content'] .= "<tr>
                            <th>Student ID</th>
-                           <th>Password</th>
                            <th>DOB</th>
                            <th>First Name</th>
                            <th>Last Name</th>
