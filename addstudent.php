@@ -29,7 +29,7 @@ if (isset($_SESSION['id'])) {
 
       $result = mysqli_query($conn,$sql)
       
-   }
+   
       
 
       $data['content'] = "<p>A new student record has been added</p>";
