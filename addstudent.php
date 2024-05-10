@@ -27,7 +27,7 @@ if (isset($_SESSION['id'])) {
 
       echo $sql;
 
-      $result = mysqli_query($conn,$sql)
+      $result = mysqli_query($conn,$sql);
       
    
       
