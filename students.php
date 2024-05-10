@@ -18,7 +18,7 @@ if ($db->connect_error) {
     die("Connection failed: " . $db->connect_error);
 }
 $sql = "INSERT INTO student (studentid, password, dob, firstname, lastname, house, town, county, country, postcode)
-        VALUES ('20000001', 'password', '2000-01-01', 'John', 'Doe', '1', 'Town', 'County', 'Country', 'AB1 2CD')";
+        VALUES ('20000002', 'password', '2000-01-01', 'John', 'Doe', '1', 'Town', 'County', 'Country', 'AB1 2CD')";
 
 if ($db->query($sql) === TRUE) {
     echo "New record created successfully\n";
