@@ -20,10 +20,11 @@ if (isset($_SESSION['id'])) {
 
    // insert statememt 
      
-         $sql = "INSERT INTO student 
-                  (studentid, password, dob, firstname, lastname, house, town, county, country, postcode, imagedata)
-                  VALUES ('{$_POST['studentid']}', '$hashed_password', '{$_POST['dob']}', '{$_POST['firstname']}', '{$_POST['lastname']}',
-                         '{$_POST['house']}', '{$_POST['town']}', '{$_POST['county']}', '{$_POST['country']}', '{$_POST['postcode']}', '{$_POST['imagedata']}')";
+   $sql = "INSERT INTO student 
+           (studentid, password, dob, firstname, lastname, house, town, county, country, postcode, imagedata)
+           VALUES ('{$_POST['studentid']}', '$hashed_password', '{$_POST['dob']}', '{$_POST['firstname']}', '{$_POST['lastname']}',
+                   '{$_POST['house']}', '{$_POST['town']}', '{$_POST['county']}', '{$_POST['country']}', '{$_POST['postcode']}', '{$_FILES['imagedata']['name']}')";
+   
 
       echo $sql;
 
