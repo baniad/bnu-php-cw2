@@ -13,7 +13,6 @@
 $faker = Faker\Factory::create();
 
 
-<?php
 for ($i=0; $i < 5; $i++){
     $studentid = $faker->unique()->numberBetween(20000001, 29999999);
     $sql = "INSERT  INTO student
