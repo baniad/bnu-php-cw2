@@ -26,7 +26,7 @@ if (isset($_SESSION['id'])) {
                    '{$_POST['house']}', '{$_POST['town']}', '{$_POST['county']}', '{$_POST['country']}', '{$_POST['postcode']}', '{$_FILES['imagedata']['name']}')";
    
 
-      echo $sql;
+      //echo $sql;
 
       $result = mysqli_query($conn,$sql);
       

@@ -1,47 +1,72 @@
 <?php
 
 include("_includes/config.inc");
-   include("_includes/dbconnect.inc");
-   include("_includes/functions.inc");
+include("_includes/dbconnect.inc");
+include("_includes/functions.inc");
 
-   echo template("templates/partials/header.php");
+//adding delete functionality
 
-require_once 'vendor/autoload.php';
-
-// Create a new instance of Faker
-$faker = Faker\Factory::create();
-
-// Connect to the database
-$db = new mysqli("localhost", "root", "", "php_cw2");
-
-// Check the connection
-if ($db->connect_error) {
-    die("Connection failed: " . $db->connect_error);
+if(!empty($_POST['delete']))
+{
+//loop through the array of students to delete
+foreach($_POST['delete'] as $student_id => $value)
+{
+    //delete the student record
+    $stmt = $conn->prepare("DELETE FROM student WHERE studentid = ?");
+    $stmt->bind_param("s", $student_id);
+    $stmt->execute();
+    $stmt->close();
 }
 
-// Insert 5 student records into the database
-for ($i = 0; $i < 5; $i++) {
-    $studentid = $faker->unique()->numberBetween(20000001, 29999999);
-    $password = password_hash($faker->password, PASSWORD_DEFAULT);
-    $dob = $faker->date('Y-m-d');
-    $firstname = $db->real_escape_string($faker->firstName);
-    $lastname = $db->real_escape_string($faker->lastName);
-    $house = $db->real_escape_string($faker->buildingNumber);
-    $town = $db->real_escape_string($faker->city);
-    $county = $db->real_escape_string($faker->state);
-    $country = $db->real_escape_string($faker->country);
-    $postcode = $db->real_escape_string($faker->postcode);
-
-    $sql = "INSERT INTO student (studentid, password, dob, firstname, lastname, house, town, county, country, postcode)
-            VALUES ('$studentid', '$password', '$dob', '$firstname', '$lastname', '$house', '$town', '$county', '$country', '$postcode')";
-
-    if ($db->query($sql) === TRUE) {
-        echo "New record created successfully\n";
-    } else {
-        echo "Error: " . $sql . "\n" . $db->error;
-    }
 }
-    echo template("templates/partials/footer.php");
 
-    $db->query($sql);
+// check if the user is logged in
+if (isset($_SESSION['id']))
+{
+  echo template("templates/partials/header.php");
+  // display the navigation
+  echo template("templates/partials/nav.php");
 
+
+  $sql = "SELECT * from student";
+
+  $result = mysqli_query($conn, $sql);
+
+  //adding a form to delete student records
+  $data['content'] .= "<form method='POST' action=''>";
+
+//adding a table to display student records
+  $data['content'] .= "<table border='1'>";
+  $data['content'] .= "<tr><th colspan='6' align='center'>Student Record</th></tr>";
+  $data['content'] .= "<tr><th>Student ID</th><th>DOB</th><th>First Name</th>";
+  $data['content'] .= "<th>Last Name</th><th>Address</th><th>Delete</th></tr>";
+
+// Display student details within the html table
+  while($row = mysqli_fetch_array($result))
+  {
+     $data['content'] .= "<tr><td> $row[studentid] </td><td> $row[dob] </td>";
+     $data['content'] .= "<td> $row[firstname] </td><td> $row[lastname] </td>";
+     $data['content'] .= "<td> $row[house] $row[town] $row[county] $row[country] $row[postcode]</td>";
+     //adding a check box
+     $data['content'] .= "<td><input type='checkbox' name='delete[$row[studentid]]'</td></tr>";
+  }
+  $data['content'] .= "</table>"; //closing html table
+  //adding delete button
+  $data['content'] .= "<input type='submit' value='Delete'/>";
+
+  //closes form
+  $data['content'] .= "</form>";
+
+  // render the template
+  echo template("templates/default.php", $data);
+
+}
+ else
+ {
+    header("Location: index.php");
+ }
+
+   echo template("templates/partials/footer.php");
+
+
+?>
