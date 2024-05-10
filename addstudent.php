@@ -34,6 +34,8 @@ if (isset($_SESSION['id'])) {
 
       $data['content'] = "<p>A new student record has been added</p>";
 
+   }
+
    
    else {
 
