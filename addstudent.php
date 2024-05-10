@@ -27,13 +27,13 @@ if (isset($_SESSION['id'])) {
 
       echo $sql;
 
-      $result = mysqli_query($conn,$sql);
+      $result = mysqli_query($conn,$sql)
       
       
 
       $data['content'] = "<p>A new student record has been added</p>";
 
-   }
+   
    else {
 
       $data['content'] = <<<EOD
