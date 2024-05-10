@@ -4,7 +4,6 @@ include("_includes/config.inc");
 include("_includes/dbconnect.inc");
 include("_includes/functions.inc");
 
-echo template("templates/partials/header.php");
 
 require_once 'vendor/autoload.php';
 
@@ -20,6 +19,8 @@ if ($db->connect_error) {
 }
 $sql = "INSERT INTO student (studentid, password, dob, firstname, lastname, house, town, county, country, postcode)
         VALUES ('20000001', 'password', '2000-01-01', 'John', 'Doe', '1', 'Town', 'County', 'Country', 'AB1 2CD')";
+
+    echo "New record created successfully\n";
 
 // Insert 5 student records into the database
 /*for ($i = 0; $i < 5; $i++) {
