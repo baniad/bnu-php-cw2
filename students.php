@@ -15,25 +15,26 @@
 
       $result = mysqli_query($conn,$sql);
 
-       $data['content'] .= '<form onsubmit="return confirm(\'Are you sure you want to delete?\')" action="deletestudents.php" method="POST">';
-
+      <?php
+      $data['content'] .= '<form onsubmit="return confirm(\'Are you sure you want to delete?\')" action="deletestudents.php" method="POST">';
+      
       // prepare page content
-      $data['content'] .= "<table border='1'>";
-      $data['content'] .= "<tr>
-                           <th>Student ID</th>
-                           <th>DOB</th>
-                           <th>First Name</th>
-                           <th>Last Name</th>
-                           <th>House</th>
-                           <th>Town</th>
-                           <th>County</th>
-                           <th>Country</th>
-                           <th>Postcode</th>
-                           <th>File</th>
-                </tr>"
-                           
-                           
-                           ;
+      $data['content'] .= "<table class='table table-striped'>";
+      $data['content'] .= "<thead class='thead-dark'>
+                             <tr>
+                               <th>Student ID</th>
+                               <th>DOB</th>
+                               <th>First Name</th>
+                               <th>Last Name</th>
+                               <th>House</th>
+                               <th>Town</th>
+                               <th>County</th>
+                               <th>Country</th>
+                               <th>Postcode</th>
+                               <th>File</th>
+                             </tr>
+                           </thead>";
+      
       // Display the student information within the html table
       while($row = mysqli_fetch_array($result)) {
          $data['content'] .= "<tr>";
@@ -49,6 +50,10 @@
          $data['content'] .= "<td> {$row["imagedata"]} </td>";
          $data['content'] .= "<td> <input type='checkbox' name='students[]' value='$row[studentid]'/></td>";
          $data['content'] .= "</tr>";
+      }
+      $data['content'] .= "</table>";
+      $data['content'] .= "</form>";
+      ?>
       }
       $data['content'] .= "</table>";
 
