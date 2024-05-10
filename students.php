@@ -1,10 +1,10 @@
 <?php
 
 include("_includes/config.inc");
-   include("_includes/dbconnect.inc");
-   include("_includes/functions.inc");
+include("_includes/dbconnect.inc");
+include("_includes/functions.inc");
 
-   echo template("templates/partials/header.php");
+echo template("templates/partials/header.php");
 
 require_once 'vendor/autoload.php';
 
@@ -41,7 +41,5 @@ for ($i = 0; $i < 5; $i++) {
         echo "Error: " . $sql . "\n" . $db->error;
     }
 }
-    echo template("templates/partials/footer.php");
 
-    $db->query($sql);
-
+echo template("templates/partials/footer.php");
