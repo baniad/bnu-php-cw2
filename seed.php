@@ -14,7 +14,7 @@ $faker = Faker\Factory::create();
 
 
   for ($i=0; $i < 5; $i++){
-      $sql = "INSERT  INTO student
+      $sql = "INSERT INTO student
             (studentid, password, dob, firstname, lastname, house, town, county, country, postcode)
             VALUES ('$i', '{$faker->password()}', '{$faker->date('Y_m_d')}','{$faker->firstname()}','{$faker->lastname()}', '{$faker->secondaryAddress()}', '{$faker->citySuffix()}',
                         '{$faker->state()}', '{$faker->country()}', '{$faker->postcode()}')";
