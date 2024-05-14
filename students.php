@@ -9,7 +9,7 @@
    // check logged in
    if (isset($_SESSION['id'])) {
 
-      echo template("templates/partials/header.php");
+    echo template("templates/partials/header.php", $data);
       echo template("templates/partials/nav.php");
 
       $sql = "SELECT * FROM student";
@@ -67,6 +67,6 @@
       header("Location: index.php");
      }
 
-   echo template("templates/partials/footer.php");
+echo template("templates/partials/footer.php", $data);
 
 ?>
