@@ -69,4 +69,3 @@
 
 echo template("templates/partials/footer.php", $data);
 
-?>
