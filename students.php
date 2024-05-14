@@ -3,6 +3,8 @@
    include("_includes/config.inc");
    include("_includes/dbconnect.inc");
    include("_includes/functions.inc");
+   include("templates/partials/header.php");
+   include("templates/partials/footer.php");
 
    // check logged in
    if (isset($_SESSION['id'])) {
@@ -54,7 +56,11 @@
       $data['content'] .= "</form>";
       
       // render the template
-      echo template("templates/default.php", $data);
+    function template($template, $data) {
+        // Function implementation goes here
+    }
+
+    echo template("templates/default.php", $data);
      }
      else 
      {
