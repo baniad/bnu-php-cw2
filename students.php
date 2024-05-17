@@ -43,5 +43,3 @@ else
 }
 
 echo template("templates/partials/footer.php");
-
-?>
