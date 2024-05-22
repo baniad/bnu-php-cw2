@@ -28,7 +28,7 @@ if (isset($_SESSION['id'])) {
       $data['content'] .= "<p class='card-text'>DOB: {$row["dob"]}</p>";
       $data['content'] .= "<p class='card-text'>House: {$row["house"]}</p>";
       $data['content'] .= "<p class='card-text'>Town: {$row["town"]}</p>";
-      $data['content'] .= "<input type='checkbox' name='students[]' value='{$row["studentid"]}'/>";
+      $data['content'] .= "<input type='checkbox' name='students[]' value='{$row["studentid"]}'/> Delete"; // Added "Delete" next to the checkbox
       $data['content'] .= "</div>";
       $data['content'] .= "</div>";
       $data['content'] .= "</div>"; // End of col-sm-4
