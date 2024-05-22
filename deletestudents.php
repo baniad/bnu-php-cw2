@@ -9,18 +9,20 @@
            header("Location: students.php");
        }
 
-       foreach($_POST['students'] as $theStudent){
-           echo "<script>
-               var r = confirm('Are you sure you want to delete this student?');
-               if (r == true) {
-                   <?php
-                       $sql = 'DELETE FROM student WHERE studentid = ' . $theStudent;
-                       $result = mysqli_query($conn,$sql);
-                   ?>
-               } else {
-                   // User pressed cancel, do nothing
-               }
-           </script>";
+       echo "<script>
+           var r = confirm('Are you sure you want to delete these students?');
+           if (r == true) {
+               window.location.href = 'deletestudents.php?confirm=true';
+           } else {
+               window.location.href = 'students.php';
+           }
+       </script>";
+
+       if (isset($_GET['confirm']) && $_GET['confirm'] == 'true') {
+           foreach($_POST['students'] as $theStudent){
+               $sql = 'DELETE FROM student WHERE studentid = ' . $theStudent;
+               $result = mysqli_query($conn,$sql);
+           }
        }
    }
 ?>
