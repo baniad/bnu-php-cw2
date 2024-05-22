@@ -10,9 +10,9 @@ if (isset($_SESSION['id'])) {
    echo template("templates/partials/header.php");
    echo template("templates/partials/nav.php");
 
-   $sql = "SELECT * FROM student";
-
-   $result = mysqli_query($conn,$sql);
+   $stmt = $conn->prepare("SELECT * FROM student");
+   $stmt->execute();
+   $result = $stmt->get_result();
 
    $data['content'] .= '<form onsubmit="return confirm(\'Are you sure you want to delete?\')" action="deletestudents.php" method="POST">';
    
@@ -20,7 +20,7 @@ if (isset($_SESSION['id'])) {
    $data['content'] .= "<div class='row'>";
    
    // Display the student information within Bootstrap cards
-   while($row = mysqli_fetch_array($result)) {
+   while($row = $result->fetch_assoc()) {
       $data['content'] .= "<div class='col-sm-4'>";
       $data['content'] .= "<div class='card' style='width: 18rem;'>";
       $data['content'] .= "<div class='card-body'>";
@@ -47,4 +47,5 @@ else
 }
 
 echo template("templates/partials/footer.php");
+
 ?>
