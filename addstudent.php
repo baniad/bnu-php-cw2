@@ -43,15 +43,15 @@ if (isset($_SESSION['id'])) {
                 // Insert into database
                 $stmt = $conn->prepare("INSERT INTO student (studentid, password, firstname, lastname, dob, house) 
                         VALUES (?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("isssss", $studentid, $hashed_password, $firstname, $lastname, $dob, $house);
+         $stmt->bind_param("isssss", $studentid, $hashed_password, $firstname, $lastname, $dob, $house);
 
-if ($stmt->execute()) {
-    echo "New student created successfully";
-} else {
-    echo "Error: " . $stmt->error;
-}
-$stmt->close();
-            }
+            if ($stmt->execute()) {
+               echo "New student created successfully";
+         } else {
+             echo "Error: " . $stmt->error;
+         }
+            $stmt->close();
+          }
         }
     } else {
         // Display the form

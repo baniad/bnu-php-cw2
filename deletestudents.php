@@ -19,15 +19,15 @@
        </script>";
 
        if (isset($_GET['confirm']) && $_GET['confirm'] == 'true') {
-           foreach($_POST['students'] as $theStudent){
-               $sql = 'DELETE FROM student WHERE studentid = ' . $theStudent;
-               $result = mysqli_query($conn,$sql);
-               if (mysqli_affected_rows($conn) > 0) {
-                   echo "Student with ID $theStudent has been deleted successfully.";
-               } else {
-                   echo "No student with ID $theStudent was found.";
-               }
-           }
+         <?php
+         $stmt = $conn->prepare('DELETE FROM student WHERE studentid = ?');
+         foreach($_POST['students'] as $theStudent){
+             $stmt->bind_param("i", $theStudent);
+             $stmt->execute();
+             // ... rest of your code ...
+         }
+         $stmt->close();
+         ?>
        }
    }
 ?>
