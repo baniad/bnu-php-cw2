@@ -19,7 +19,6 @@
        </script>";
 
        if (isset($_GET['confirm']) && $_GET['confirm'] == 'true') {
-         <?php
          $stmt = $conn->prepare('DELETE FROM student WHERE studentid = ?');
          foreach($_POST['students'] as $theStudent){
              $stmt->bind_param("i", $theStudent);
