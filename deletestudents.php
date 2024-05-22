@@ -27,7 +27,7 @@
              // ... rest of your code ...
          }
          $stmt->close();
-         ?>
+      
        }
    }
 ?>
