@@ -41,13 +41,16 @@ if (isset($_SESSION['id'])) {
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
                 // Insert into database
-                $sql = "INSERT INTO student (studentid, password, firstname, lastname, dob, house) 
-                        VALUES ('$studentid', '$hashed_password', '$firstname', '$lastname', '$dob', '$house')";
-                if (mysqli_query($conn, $sql)) {
-                    echo "New student created successfully";
-                } else {
-                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-                }
+                $stmt = $conn->prepare("INSERT INTO student (studentid, password, firstname, lastname, dob, house) 
+                        VALUES (?, ?, ?, ?, ?, ?)");
+$stmt->bind_param("isssss", $studentid, $hashed_password, $firstname, $lastname, $dob, $house);
+
+if ($stmt->execute()) {
+    echo "New student created successfully";
+} else {
+    echo "Error: " . $stmt->error;
+}
+$stmt->close();
             }
         }
     } else {
