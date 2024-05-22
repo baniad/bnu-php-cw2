@@ -22,6 +22,11 @@
            foreach($_POST['students'] as $theStudent){
                $sql = 'DELETE FROM student WHERE studentid = ' . $theStudent;
                $result = mysqli_query($conn,$sql);
+               if (mysqli_affected_rows($conn) > 0) {
+                   echo "Student with ID $theStudent has been deleted successfully.";
+               } else {
+                   echo "No student with ID $theStudent was found.";
+               }
            }
        }
    }
