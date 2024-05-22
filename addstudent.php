@@ -44,5 +44,21 @@ if (isset($_SESSION['id'])) {
                 echo "Error: " . $sql . "<br>" . mysqli_error($conn);
             }
         }
+    } else {
+        // Display the form
+        echo "
+        <form method='post' action=''>
+            Student ID: <input type='text' name='studentid'><br>
+            Password: <input type='password' name='password'><br>
+            First Name: <input type='text' name='firstname'><br>
+            Last Name: <input type='text' name='lastname'><br>
+            Date of Birth: <input type='text' name='dob'><br>
+            House: <input type='text' name='house'><br>
+            <input type='submit' name='submit' value='Add Student'>
+        </form>
+        ";
     }
+
+    echo template("templates/partials/footer.php");
 }
+?>
