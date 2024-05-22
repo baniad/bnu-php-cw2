@@ -1,3 +1,7 @@
+<?php
+   $current_page = basename($_SERVER['PHP_SELF']);
+?>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">University Database</a>
@@ -5,7 +9,13 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link <?php if($current_page == 'modules.php') { echo 'active'; } ?>" href="modules.php">My Modules</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link <?php if($current_page == 'students.php') { echo 'active'; } ?>" href="students.php">Students</a>
+        </li> <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="modules.php">My Modules</a>
         </li>
