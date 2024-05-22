@@ -9,7 +9,13 @@
        crossorigin="anonymous">
 
        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-
+      
+      <style>
+    .nav-link.active {
+      background-color: blue;
+      color: white;
+    }
+  </style>
    </head>
 
    <body>
