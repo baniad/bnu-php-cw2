@@ -29,19 +29,25 @@ if (isset($_SESSION['id'])) {
             echo "Only letters and white space allowed in first name";
         } elseif (!preg_match("/^[a-zA-Z-' ]*$/",$lastname)) {
             echo "Only letters and white space allowed in last name";
-        } elseif (!DateTime::createFromFormat('d-m-Y', $dob)) {
-            echo "Invalid date of birth. Please use the format dd-mm-yyyy";
         } else {
-            // Hash password
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-            // Insert into database
-            $sql = "INSERT INTO student (studentid, password, firstname, lastname, dob, house) 
-                    VALUES ('$studentid', '$hashed_password', '$firstname', '$lastname', '$dob', '$house')";
-            if (mysqli_query($conn, $sql)) {
-                echo "New student created successfully";
+            // Convert dob to MySQL format
+            $dob = DateTime::createFromFormat('d-m-Y', $dob);
+            if (!$dob) {
+                echo "Invalid date of birth. Please use the format dd-mm-yyyy";
             } else {
-                echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                $dob = $dob->format('Y-m-d');
+
+                // Hash password
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+                // Insert into database
+                $sql = "INSERT INTO student (studentid, password, firstname, lastname, dob, house) 
+                        VALUES ('$studentid', '$hashed_password', '$firstname', '$lastname', '$dob', '$house')";
+                if (mysqli_query($conn, $sql)) {
+                    echo "New student created successfully";
+                } else {
+                    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+                }
             }
         }
     } else {
