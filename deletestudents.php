@@ -7,6 +7,13 @@ if (isset($_SESSION['id'])) {
         header("Location: students.php");
     }
 
+    <?php
+if (!isset($_POST['students']) || empty($_POST['students'])) {
+    echo "No students selected for deletion.";
+    exit;
+}
+
+
     if (isset($_POST['confirm'])) {
         $stmt = $conn->prepare('DELETE FROM student WHERE studentid = ?');
         foreach($_POST['students'] as $theStudent){
