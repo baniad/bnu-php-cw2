@@ -18,7 +18,7 @@
            }
        </script>";
 
-       <?php
+       
 if (isset($_POST['confirm'])) {
     $stmt = $conn->prepare('DELETE FROM student WHERE studentid = ?');
     foreach($_POST['students'] as $theStudent){
