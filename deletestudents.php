@@ -17,7 +17,7 @@
                window.location.href = 'students.php';
            }
        </script>";
-
+         }
        
 if (isset($_POST['confirm'])) {
     $stmt = $conn->prepare('DELETE FROM student WHERE studentid = ?');
